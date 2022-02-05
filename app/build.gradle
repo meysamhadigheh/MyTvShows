@@ -47,9 +47,13 @@ dependencies {
 
     implementation 'androidx.multidex:multidex:2.0.1'
 
-    // retrofit
+    //Retrofit
     implementation "com.squareup.retrofit2:retrofit:2.9.0"
     implementation "com.squareup.retrofit2:converter-moshi:2.9.0"
+
+    // Gson
+    // https://github.com/google/gson
+    implementation 'com.google.code.gson:gson:2.8.8'
 
     //ktx android
     implementation 'androidx.fragment:fragment-ktx:1.4.1'
