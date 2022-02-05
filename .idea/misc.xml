@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/ic_hexagon.xml" value="0.206" />
+        <entry key="app/src/main/res/drawable/shadow_up.xml" value="0.206" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.11246200607902736" />
         <entry key="app/src/main/res/layout/fragment_movies.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_movie.xml" value="0.11246200607902736" />

@@ -7,4 +7,11 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+
+
+    <color name="rate4">#df4751</color>
+    <color name="rate5">#5369a2</color>
+    <color name="rate7">#1d8acd</color>
+    <color name="rate8">#2FC482</color>
 </resources>
