@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import info.meysam.mytvshows.api.MoviesService
@@ -100,11 +101,11 @@ class MoviesFragment : Fragment() {
 
         moviesAdapter = MovieAdapter()
 
-        val linearLayoutManager =
-            LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+        val gridLayoutManager =
+            GridLayoutManager(requireContext(),2, RecyclerView.VERTICAL, false)
 
         binding.recyclerMovies.adapter = moviesAdapter
-        binding.recyclerMovies.layoutManager = linearLayoutManager
+        binding.recyclerMovies.layoutManager = gridLayoutManager
     }
     private fun fetchPopularMovies() {
 
