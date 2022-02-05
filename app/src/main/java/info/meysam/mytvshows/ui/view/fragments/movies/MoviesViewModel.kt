@@ -1,4 +1,4 @@
-package info.meysam.mytvshows.ui.view.fragments
+package info.meysam.mytvshows.ui.view.fragments.movies
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

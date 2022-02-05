@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/moviesFragment"
-        android:name="info.meysam.mytvshows.ui.view.fragments.MoviesFragment"
+        android:name="info.meysam.mytvshows.ui.view.fragments.movies.MoviesFragment"
         android:label="MapsFragment" >
 
     </fragment>

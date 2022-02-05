@@ -1,4 +1,4 @@
-package info.meysam.mytvshows.ui.view.fragments
+package info.meysam.mytvshows.ui.view.fragments.movies
 
 
 import android.os.Bundle
@@ -14,7 +14,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import info.meysam.mytvshows.R
 import info.meysam.mytvshows.api.MoviesService
 import info.meysam.mytvshows.databinding.FragmentMoviesBinding
 import info.meysam.mytvshows.repository.impl.MoviesRepository
@@ -145,7 +144,8 @@ class MoviesFragment : Fragment() {
     }
 
     private fun searchMovies(text: CharSequence) {
-        var searchText=text.toString()
+
+        val searchText=text.toString()
         viewModel.searchMovies(searchText)
 
     }
