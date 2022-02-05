@@ -2,6 +2,7 @@ package info.meysam.mytvshows.repository.impl
 
 
 import info.meysam.mytvshows.api.MoviesPopularQueryBuilder
+import info.meysam.mytvshows.api.MoviesSearchQueryBuilder
 import info.meysam.mytvshows.api.MoviesService
 import info.meysam.mytvshows.api.model.GetMoviesResponse
 
@@ -20,6 +21,20 @@ class MoviesRepository(private val moviesService: MoviesService)  {
 
 
         return repo
+
+    }
+
+    suspend fun searchMovies(page: Int? =null,searchText: String): Response<GetMoviesResponse> {
+
+        val query = MoviesSearchQueryBuilder()
+            .setPage(page ?: 1)
+            .setQuery(searchText)
+            .build()
+
+        var repo= moviesService.searchMovies(query)
+
+        return repo
+
 
     }
 }

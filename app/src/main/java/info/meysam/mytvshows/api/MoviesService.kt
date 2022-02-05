@@ -20,6 +20,12 @@ interface MoviesService {
     @GET("movie/popular")
     suspend fun getPopularMovies(@QueryMap query: Map<String, String>): Response<GetMoviesResponse>
 
+
+    @GET("search/movie")
+    suspend fun searchMovies(@QueryMap query: Map<String, String>): Response<GetMoviesResponse>
+
+
+
     companion object  {
 
         var interceptor = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)

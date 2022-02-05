@@ -39,6 +39,25 @@ class MoviesViewModel(
             }
         }
     }
+    fun searchMovies(searchText: String) {
+
+        job = CoroutineScope(Dispatchers.IO).launch {
+            val response = moviesRepository.searchMovies(searchText =searchText)
+            withContext(Dispatchers.Main) {
+
+                if (response.isSuccessful) {
+                    movies.postValue(response.body()?.results)
+                    loading.value = false
+                } else {
+                    onError("Error : ${response.message()} ")
+                }
+
+
+            }
+        }
+
+
+    }
 
     private fun onError(message: String) {
         errorMessage.value = message
@@ -51,6 +70,8 @@ class MoviesViewModel(
         super.onCleared()
         job?.cancel()
     }
+
+
 
 
 }
