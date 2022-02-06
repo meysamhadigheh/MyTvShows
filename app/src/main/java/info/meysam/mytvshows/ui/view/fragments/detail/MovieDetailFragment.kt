@@ -86,6 +86,7 @@ class MovieDetailFragment : Fragment() {
             binding.movieRating.rating = (it.vote_average ?:0F )/2
             binding.movieReleaseDate.text = it.release_date
             binding.movieOverview.text = it.overview
+            binding.movieBudget.text=it.budget.toString()
 
 
         }
