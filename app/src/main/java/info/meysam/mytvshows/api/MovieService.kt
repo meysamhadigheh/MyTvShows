@@ -41,8 +41,8 @@ interface MovieService {
 
 
         val okHttpClient = OkHttpClient.Builder()
-            .readTimeout(60, TimeUnit.SECONDS)
-            .connectTimeout(60, TimeUnit.SECONDS)
+            .readTimeout(15, TimeUnit.SECONDS)
+            .connectTimeout(5, TimeUnit.SECONDS)
             .addInterceptor(interceptor)
             .build()
         private val retrofit by lazy {
