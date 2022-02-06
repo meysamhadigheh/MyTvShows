@@ -1,6 +1,8 @@
 package info.meysam.mytvshows.api.model
 
-data class MovieDetail (
+import java.util.*
+
+data class MovieDetail(
     var adult: Boolean? = null,
     var backdrop_path: String? = null,
     var belongs_to_collection: BelongsToCollection? = null,
@@ -26,4 +28,25 @@ data class MovieDetail (
     var video: Boolean? = null,
     var vote_average: Float? = null,
     var vote_count: Int? = null,
-)
+) {
+
+
+    fun getBudget(): String? {
+
+        budget?.let {
+
+            if (it < 1000) return "" + it
+            val exp = (Math.log(it.toDouble()) / Math.log(1000.0)).toInt()
+            return String.format(
+                "%.1f %c",
+                it / Math.pow(1000.0, exp.toDouble()),
+                "kMGTPE"[exp - 1]
+            )
+
+        }
+
+
+        return budget.toString()
+
+    }
+}
