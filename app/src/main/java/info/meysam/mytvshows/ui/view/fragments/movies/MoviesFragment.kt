@@ -23,6 +23,9 @@ import info.meysam.mytvshows.databinding.FragmentMoviesBinding
 import info.meysam.mytvshows.repository.impl.MovieRepository
 import info.meysam.mytvshows.ui.view.activities.MainActivityViewModel
 
+import info.meysam.mytvshows.utilModule.general.visible
+import info.meysam.mytvshows.utilModule.general.gone
+
 
 class MoviesFragment : Fragment() {
 
@@ -79,8 +82,16 @@ class MoviesFragment : Fragment() {
 
         viewModel.movies.observe(viewLifecycleOwner, Observer { movies ->
 
-            movies?.let { moviesAdapter.items=it.toCollection(ArrayList())
-            moviesAdapter.notifyDataSetChanged()}
+            movies?.let {
+                moviesAdapter.items=it.toCollection(ArrayList())
+                moviesAdapter.notifyDataSetChanged()
+                if (it.isEmpty()) binding.emptyLayout.root.visible() else binding.emptyLayout.root.gone()
+
+
+
+            }
+
+
 
         })
 
