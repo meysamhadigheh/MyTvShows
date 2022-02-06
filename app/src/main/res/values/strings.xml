@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">MyTvShows</string>
     <string name="search_movie">search movie</string>
+    <string name="an_error_occurred">An error occurred</string>
 </resources>

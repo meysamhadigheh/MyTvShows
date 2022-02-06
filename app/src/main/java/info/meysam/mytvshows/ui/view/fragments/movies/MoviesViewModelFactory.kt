@@ -2,17 +2,17 @@ package info.meysam.mytvshows.ui.view.fragments.movies
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import info.meysam.mytvshows.repository.impl.MoviesRepository
+import info.meysam.mytvshows.repository.impl.MovieRepository
 
 
 class MoviesViewModelFactory(
 
-    private val moviesRepository: MoviesRepository
+    private val movieRepository: MovieRepository
 
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MoviesViewModel::class.java)) {
-            return MoviesViewModel(moviesRepository) as T
+            return MoviesViewModel(movieRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

@@ -3,12 +3,12 @@ package info.meysam.mytvshows.ui.view.fragments.movies
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import info.meysam.mytvshows.api.model.Movie
-import info.meysam.mytvshows.repository.impl.MoviesRepository
+import info.meysam.mytvshows.repository.impl.MovieRepository
 import kotlinx.coroutines.*
 
 class MoviesViewModel(
 
-    private val moviesRepository: MoviesRepository
+    private val movieRepository: MovieRepository
 ) : ViewModel() {
 
     sealed class State {}
@@ -25,7 +25,7 @@ class MoviesViewModel(
 
     fun getPopularMovies(page: Int? = 1) {
         job = CoroutineScope(Dispatchers.IO).launch {
-            val response = moviesRepository.getPopularMovies(page)
+            val response = movieRepository.getPopularMovies(page)
             withContext(Dispatchers.Main) {
 
                 if (response.isSuccessful) {
@@ -42,7 +42,7 @@ class MoviesViewModel(
     fun searchMovies(searchText: String) {
 
         job = CoroutineScope(Dispatchers.IO).launch {
-            val response = moviesRepository.searchMovies(searchText =searchText)
+            val response = movieRepository.searchMovies(searchText =searchText)
             withContext(Dispatchers.Main) {
 
                 if (response.isSuccessful) {

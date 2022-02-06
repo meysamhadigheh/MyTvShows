@@ -3,12 +3,15 @@ package info.meysam.mytvshows.repository.impl
 
 import info.meysam.mytvshows.api.MoviesPopularQueryBuilder
 import info.meysam.mytvshows.api.MoviesSearchQueryBuilder
-import info.meysam.mytvshows.api.MoviesService
+import info.meysam.mytvshows.api.MovieService
 import info.meysam.mytvshows.api.model.GetMoviesResponse
+import info.meysam.mytvshows.api.model.MovieDetail
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 import retrofit2.Response
 
-class MoviesRepository(private val moviesService: MoviesService)  {
+class MovieRepository(private val movieService: MovieService)  {
 
     suspend fun getPopularMovies(page: Int?): Response<GetMoviesResponse> {
 
@@ -17,7 +20,7 @@ class MoviesRepository(private val moviesService: MoviesService)  {
             .setPage(page ?: 1)
             .build()
 
-        var repo= moviesService.getPopularMovies(query)
+        var repo= movieService.getPopularMovies(query)
 
 
         return repo
@@ -31,11 +34,20 @@ class MoviesRepository(private val moviesService: MoviesService)  {
             .setQuery(searchText)
             .build()
 
-        var repo= moviesService.searchMovies(query)
+        var repo= movieService.searchMovies(query)
 
         return repo
 
 
+    }
+
+    suspend fun getMovieDetail(id: Int): Response<MovieDetail> {
+        val query = MoviesSearchQueryBuilder()
+            .build()
+
+        var repo= movieService.getMovieDetail(query,id)
+
+        return repo
     }
 }
 

@@ -2,7 +2,7 @@ package info.meysam.mytvshows.api
 
 import info.meysam.mytvshows.BuildConfig
 
-abstract class MoviesQueryBuilder {
+abstract class MovieQueryBuilder {
 
     fun build(): Map<String, String> {
         val queryParams = hashMapOf("api_key" to BuildConfig.API_KEY)

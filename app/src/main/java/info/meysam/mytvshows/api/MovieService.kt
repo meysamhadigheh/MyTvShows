@@ -3,26 +3,32 @@ package info.meysam.mytvshows.api
 
 import info.meysam.mytvshows.BuildConfig
 import info.meysam.mytvshows.api.model.GetMoviesResponse
-import info.meysam.mytvshows.utilModule.general.NetworkConnectionInterceptor
+import info.meysam.mytvshows.api.model.MovieDetail
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.QueryMap
 import java.util.concurrent.TimeUnit
 
 
-interface MoviesService {
+interface MovieService {
 
 
     @GET("movie/popular")
     suspend fun getPopularMovies(@QueryMap query: Map<String, String>): Response<GetMoviesResponse>
 
-
     @GET("search/movie")
     suspend fun searchMovies(@QueryMap query: Map<String, String>): Response<GetMoviesResponse>
+
+    @GET("/movie/{movie_id}")
+    suspend fun getMovieDetail(
+        @QueryMap query: Map<String, String>,
+        @Path("movie_id") id: Int?): Response<MovieDetail>
+
 
 
 
@@ -45,6 +51,6 @@ interface MoviesService {
                 .build()
         }
 
-        val instance: MoviesService by lazy { retrofit.create(MoviesService::class.java) }
+        val instance: MovieService by lazy { retrofit.create(MovieService::class.java) }
     }
 }

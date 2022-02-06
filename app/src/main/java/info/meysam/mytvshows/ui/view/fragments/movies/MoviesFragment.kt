@@ -12,13 +12,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import info.meysam.mytvshows.api.MoviesService
+import info.meysam.hivaadapter.HivaRecyclerAdapter
+import info.meysam.mytvshows.R
+import info.meysam.mytvshows.api.MovieService
+import info.meysam.mytvshows.api.model.Movie
 import info.meysam.mytvshows.databinding.FragmentMoviesBinding
-import info.meysam.mytvshows.repository.impl.MoviesRepository
-import info.meysam.mytvshows.ui.adapter.MovieAdapter
+import info.meysam.mytvshows.repository.impl.MovieRepository
 import info.meysam.mytvshows.ui.view.activities.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_movies.*
 
@@ -29,9 +31,8 @@ class MoviesFragment : Fragment() {
 
     private val sharedViewModel: MainActivityViewModel by activityViewModels()
 
-    var moviesAdapter = MovieAdapter()
+    var moviesAdapter = HivaRecyclerAdapter()
     lateinit var binding: FragmentMoviesBinding
-
 
 
     override fun onCreateView(
@@ -51,9 +52,9 @@ class MoviesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        val moviesService = MoviesService.instance
+        val moviesService = MovieService.instance
 
-        val moviesRepository = MoviesRepository(moviesService)
+        val moviesRepository = MovieRepository(moviesService)
 
 
         viewModel =
@@ -79,7 +80,8 @@ class MoviesFragment : Fragment() {
 
         viewModel.movies.observe(viewLifecycleOwner, Observer { movies ->
 
-            movies?.let { moviesAdapter.setMovies(it) }
+            movies?.let { moviesAdapter.items=it.toCollection(ArrayList())
+            moviesAdapter.notifyDataSetChanged()}
 
         })
 
@@ -96,17 +98,34 @@ class MoviesFragment : Fragment() {
 
 
     }
+
     private fun initRecyclerView() {
 
 
-        moviesAdapter = MovieAdapter()
+        moviesAdapter = HivaRecyclerAdapter()
 
         val gridLayoutManager =
-            GridLayoutManager(requireContext(),2, RecyclerView.VERTICAL, false)
+            GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false)
 
         binding.recyclerMovies.adapter = moviesAdapter
         binding.recyclerMovies.layoutManager = gridLayoutManager
+
+        moviesAdapter.setItemsListener(Movie::class.java, object : Movie.ClickListener {
+            override fun itemClicked(movie: Movie) {
+
+
+                view?.let { Navigation.findNavController(it).navigate(R.id.action_moviesFragment_to_movieDetailFragment) };
+
+            }
+
+        })
+
+
+        //
+
+
     }
+
     private fun fetchPopularMovies() {
 
         viewModel.getPopularMovies()
@@ -127,7 +146,7 @@ class MoviesFragment : Fragment() {
 
             override fun onTextChanged(text: CharSequence, p1: Int, p2: Int, p3: Int) {
 
-                if (text.isNotEmpty() && text.length >=3) {
+                if (text.isNotEmpty() && text.length >= 3) {
 
                     searchMovies(text)
 
@@ -146,7 +165,7 @@ class MoviesFragment : Fragment() {
 
     private fun searchMovies(text: CharSequence) {
 
-        val searchText=text.toString()
+        val searchText = text.toString()
         viewModel.searchMovies(searchText)
 
     }

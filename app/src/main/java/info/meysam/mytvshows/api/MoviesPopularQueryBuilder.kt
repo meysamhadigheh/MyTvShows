@@ -1,6 +1,6 @@
 package info.meysam.mytvshows.api
 
-class MoviesPopularQueryBuilder : MoviesQueryBuilder() {
+class MoviesPopularQueryBuilder : MovieQueryBuilder() {
     private var page: String? = null
 
 

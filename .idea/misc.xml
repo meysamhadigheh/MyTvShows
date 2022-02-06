@@ -9,6 +9,7 @@
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.206" />
         <entry key="app/src/main/res/drawable/shadow_up.xml" value="0.206" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.11246200607902736" />
+        <entry key="app/src/main/res/layout/fragment_movie_detail.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_movies.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_movie.xml" value="0.11246200607902736" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1105" />
