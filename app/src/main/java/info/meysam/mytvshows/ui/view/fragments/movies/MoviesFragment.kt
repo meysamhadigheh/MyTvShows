@@ -21,6 +21,7 @@ import info.meysam.mytvshows.api.MovieService
 import info.meysam.mytvshows.api.model.Movie
 import info.meysam.mytvshows.databinding.FragmentMoviesBinding
 import info.meysam.mytvshows.repository.impl.MovieRepository
+import info.meysam.mytvshows.ui.adapter.MovieAdapter
 import info.meysam.mytvshows.ui.view.activities.MainActivityViewModel
 
 import info.meysam.mytvshows.utilModule.general.visible
@@ -33,7 +34,7 @@ class MoviesFragment : Fragment() {
 
     private val sharedViewModel: MainActivityViewModel by activityViewModels()
 
-    var moviesAdapter = HivaRecyclerAdapter()
+    lateinit var moviesAdapter :MovieAdapter
     lateinit var binding: FragmentMoviesBinding
 
 
@@ -83,8 +84,8 @@ class MoviesFragment : Fragment() {
         viewModel.movies.observe(viewLifecycleOwner, Observer { movies ->
 
             movies?.let {
-                moviesAdapter.items=it.toCollection(ArrayList())
-                moviesAdapter.notifyDataSetChanged()
+                moviesAdapter.setMovies(it)
+
                 if (it.isEmpty()) binding.emptyLayout.root.visible() else binding.emptyLayout.root.gone()
 
 
@@ -112,26 +113,21 @@ class MoviesFragment : Fragment() {
     private fun initRecyclerView() {
 
 
-        moviesAdapter = HivaRecyclerAdapter()
-
-        val gridLayoutManager =
-            GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false)
-
-        binding.recyclerMovies.adapter = moviesAdapter
-        binding.recyclerMovies.layoutManager = gridLayoutManager
-
-        moviesAdapter.setItemsListener(Movie::class.java, object : Movie.ClickListener {
-            override fun itemClicked(movie: Movie) {
+        moviesAdapter = MovieAdapter(MovieAdapter.OnClickListener{ movie->
 
 
                 sharedViewModel.setMovieId(movie.id)
 
                 view?.let { Navigation.findNavController(it).navigate(R.id.action_moviesFragment_to_movieDetailFragment) };
 
-            }
 
         })
 
+        val gridLayoutManager =
+            GridLayoutManager(requireContext(), 2, RecyclerView.VERTICAL, false)
+
+        binding.recyclerMovies.adapter = moviesAdapter
+        binding.recyclerMovies.layoutManager = gridLayoutManager
 
 
     }
