@@ -1,5 +1,6 @@
 package info.meysam.mytvshows.ui.view.fragments.detail
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import info.meysam.mytvshows.R
 import info.meysam.mytvshows.api.MovieService
 import info.meysam.mytvshows.databinding.FragmentMovieDetailBinding
 import info.meysam.mytvshows.repository.impl.MovieRepository
@@ -93,7 +96,7 @@ class MovieDetailFragment : Fragment() {
 
 
         viewModel.errorMessage.observe(viewLifecycleOwner) {
-            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+            displayNetworkError()
         }
         viewModel.loading.observe(viewLifecycleOwner, Observer {
             if (it) {
@@ -103,6 +106,22 @@ class MovieDetailFragment : Fragment() {
             }
         })
 
+    }
+
+
+    private fun displayNetworkError() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.oups)
+            .setMessage(R.string.search_movies_error)
+            .setPositiveButton(getString(R.string.retry)
+            ) { dialogInterface, i ->
+                fetchMovieDetail()
+            }
+            .setNegativeButton(android.R.string.cancel
+            ) { dialogInterface, i ->
+                activity?.onBackPressed()
+            }
+            .show()
     }
 
 

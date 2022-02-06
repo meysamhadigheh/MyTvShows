@@ -3,5 +3,7 @@
     <string name="search_movie">search movie</string>
     <string name="an_error_occurred">An error occurred</string>
     <string name="search_movies_error">Something went wrong while searching for movies. Please check if you are online.</string>
+    <string name="oups">Oups!</string>
+    <string name="retry">retry</string>
 
 </resources>

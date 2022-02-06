@@ -1,6 +1,7 @@
 package info.meysam.mytvshows.ui.view.fragments.movies
 
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -15,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import info.meysam.hivaadapter.HivaRecyclerAdapter
 import info.meysam.mytvshows.R
 import info.meysam.mytvshows.api.MovieService
@@ -97,7 +99,9 @@ class MoviesFragment : Fragment() {
         })
 
         viewModel.errorMessage.observe(viewLifecycleOwner) {
-            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+
+            displayNetworkError()
+
         }
         viewModel.loading.observe(viewLifecycleOwner, Observer {
             if (it) {
@@ -116,7 +120,7 @@ class MoviesFragment : Fragment() {
         moviesAdapter = MovieAdapter(MovieAdapter.OnClickListener{ movie->
 
 
-                sharedViewModel.setMovieId(movie.id)
+                movie.id?.let { sharedViewModel.setMovieId(it) }
 
                 view?.let { Navigation.findNavController(it).navigate(R.id.action_moviesFragment_to_movieDetailFragment) };
 
@@ -174,6 +178,19 @@ class MoviesFragment : Fragment() {
         val searchText = text.toString()
         viewModel.searchMovies(searchText)
 
+    }
+
+    private fun displayNetworkError() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.oups)
+            .setMessage(R.string.search_movies_error)
+            .setPositiveButton("retry", DialogInterface.OnClickListener { dialogInterface, i ->
+                fetchPopularMovies()
+            })
+            .setNegativeButton(android.R.string.cancel,DialogInterface.OnClickListener { dialogInterface, i ->
+                activity?.onBackPressed()
+            })
+            .show()
     }
 
 }

@@ -10,18 +10,18 @@ import kotlinx.android.synthetic.main.item_movie.view.*
 
 data class Movie(
 
-    val id: Long,
-    val adult: Boolean,
-    val title: String,
-    val original_title: String,
-    val overview: String,
-    val poster_path: String,
-    val backdrop_path: String,
-    val vote_average: Float,
-    val vote_count: Int,
-    val popularity: Float,
-    val release_date: String,
-    val genre_ids: List<Int>,
+    val id: Long?=null,
+    val adult: Boolean?=null,
+    val title: String?=null,
+    val original_title: String?=null,
+    val overview: String?=null,
+    val poster_path: String?=null,
+    val backdrop_path: String?=null,
+    val vote_average: Float?=null,
+    val vote_count: Int?=null,
+    val popularity: Float?=null,
+    val release_date: String?=null,
+    val genre_ids: List<Int>?=null
 
     ) {
 

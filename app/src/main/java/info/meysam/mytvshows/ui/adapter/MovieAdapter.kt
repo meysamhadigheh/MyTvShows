@@ -35,7 +35,7 @@ class MovieAdapter(private val onClickListener: OnClickListener) : RecyclerView.
         Glide.with(holder.itemView.context).load(movie.getPosterUrl()).into(holder.binding.image)
 
         holder.binding.rateBg.setColorFilter(
-            when (movie.vote_average) {
+            when (movie.vote_average?:0F) {
 
                 in 0.toFloat()..4.9.toFloat() -> {
 
