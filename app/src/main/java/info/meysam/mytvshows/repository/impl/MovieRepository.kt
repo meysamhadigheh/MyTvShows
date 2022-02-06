@@ -5,11 +5,16 @@ import com.haroldadmin.cnradapter.NetworkResponse
 import info.meysam.mytvshows.api.MoviesPopularQueryBuilder
 import info.meysam.mytvshows.api.MoviesSearchQueryBuilder
 import info.meysam.mytvshows.api.MovieService
+import info.meysam.mytvshows.api.cache.IMovieDataSource
+import info.meysam.mytvshows.api.cache.impl.MovieDataSource
 import info.meysam.mytvshows.api.model.ErrorResponse
 import info.meysam.mytvshows.api.model.GetMoviesResponse
 import info.meysam.mytvshows.api.model.MovieDetail
 
-class MovieRepository(private val movieService: MovieService)    {
+class MovieRepository(
+    private val movieService: MovieService,
+    //private val movieDataSource: IMovieDataSource
+) {
 
     suspend fun getPopularMovies(page: Int?): NetworkResponse<GetMoviesResponse, ErrorResponse> {
 
@@ -39,10 +44,18 @@ class MovieRepository(private val movieService: MovieService)    {
     }
 
     suspend fun getMovieDetail(id: Int): NetworkResponse<MovieDetail, ErrorResponse> {
+
+
         val query = MoviesSearchQueryBuilder()
             .build()
 
-        return movieService.getMovieDetail(query = query, id = id)
+
+        var repo = movieService.getMovieDetail(query = query, id = id)
+
+
+        //movieDataSource.addMovie(repo.response.body)
+
+        return repo
     }
 }
 

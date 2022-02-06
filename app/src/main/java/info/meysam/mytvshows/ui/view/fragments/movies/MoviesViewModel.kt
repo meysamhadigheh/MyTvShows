@@ -3,6 +3,7 @@ package info.meysam.mytvshows.ui.view.fragments.movies
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.haroldadmin.cnradapter.NetworkResponse
+import info.meysam.mytvshows.api.model.LoadMoreItem
 import info.meysam.mytvshows.api.model.Movie
 import info.meysam.mytvshows.repository.impl.MovieRepository
 import kotlinx.coroutines.*
@@ -19,6 +20,12 @@ class MoviesViewModel(
 
     val errorMessage = MutableLiveData<String>()
     val loading = MutableLiveData<Boolean>()
+
+
+    var pageIndex: Int = 1
+
+    var loadMoreStatus = false
+    var loadMoreItem: LoadMoreItem? = null
 
 
     var job: Job? = null

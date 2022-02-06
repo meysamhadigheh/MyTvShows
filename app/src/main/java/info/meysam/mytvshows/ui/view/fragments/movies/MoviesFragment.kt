@@ -15,11 +15,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import info.meysam.hivaadapter.HivaRecyclerAdapter
 import info.meysam.mytvshows.R
 import info.meysam.mytvshows.api.MovieService
+import info.meysam.mytvshows.api.model.LoadMoreItem
 import info.meysam.mytvshows.api.model.Movie
 import info.meysam.mytvshows.databinding.FragmentMoviesBinding
 import info.meysam.mytvshows.repository.impl.MovieRepository
@@ -38,6 +40,8 @@ class MoviesFragment : Fragment() {
 
     lateinit var moviesAdapter :MovieAdapter
     lateinit var binding: FragmentMoviesBinding
+
+
 
 
     override fun onCreateView(
@@ -134,11 +138,30 @@ class MoviesFragment : Fragment() {
         binding.recyclerMovies.layoutManager = gridLayoutManager
 
 
+        //region load more
+//        binding.recyclerMovies.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+//            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+//                super.onScrollStateChanged(recyclerView, newState)
+//
+//                if ((recyclerView.layoutManager as GridLayoutManager).findLastVisibleItemPosition() == moviesAdapter.itemCount/2 - 1 && viewModel.loadMoreStatus) {
+//                    //bottom of list!
+//                    fetchPopularMovies()
+//                }
+//
+//            }
+//
+//
+//        })
+
+        //endregion
+
+
     }
+
 
     private fun fetchPopularMovies() {
 
-        viewModel.getPopularMovies()
+        viewModel.getPopularMovies(viewModel.pageIndex)
 
     }
 
