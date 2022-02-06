@@ -1,5 +1,6 @@
 package info.meysam.mytvshows.api.model
 
+import java.text.SimpleDateFormat
 import java.util.*
 
 data class MovieDetail(
@@ -48,5 +49,15 @@ data class MovieDetail(
 
         return budget.toString()
 
+    }
+
+
+    fun getReleaseDate():String{
+        val firstDate = release_date
+        val englishIsrael = Locale.forLanguageTag("en-US")
+        val formatter = SimpleDateFormat("yyyy-MM-dd",englishIsrael)
+        val date = formatter.parse(firstDate)
+        val desiredFormat = SimpleDateFormat("dd, MMM yyyy",englishIsrael).format(date)
+        return desiredFormat
     }
 }

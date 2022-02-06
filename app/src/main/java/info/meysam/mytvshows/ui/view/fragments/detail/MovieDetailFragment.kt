@@ -84,7 +84,7 @@ class MovieDetailFragment : Fragment() {
 
             binding.movieTitle.text = it.title
             binding.movieRating.rating = (it.vote_average ?:0F )/2
-            binding.movieReleaseDate.text = "Release Date : ${it.release_date?.replace("-","/")}"
+            binding.movieReleaseDate.text = "Release Date : ${it.getReleaseDate()}"
             binding.movieOverview.text = it.overview
             binding.movieBudget.text="Budget : $${it.getBudget()}"
 
