@@ -27,7 +27,7 @@ class MovieDetailViewModel(private val movieRepository: MovieRepository) : ViewM
     fun loadDetail(id: Int) {
 
         job = CoroutineScope(Dispatchers.IO).launch {
-            val response = movieRepository.getMovieDetail(id)
+            val response = movieRepository.getMovieDetail(id = id)
             withContext(Dispatchers.Main) {
 
                 if (response.isSuccessful) {

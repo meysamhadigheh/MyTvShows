@@ -45,7 +45,7 @@ class MovieRepository(private val movieService: MovieService)  {
         val query = MoviesSearchQueryBuilder()
             .build()
 
-        var repo= movieService.getMovieDetail(query,id)
+        var repo= movieService.getMovieDetail(query = query, id = id)
 
         return repo
     }

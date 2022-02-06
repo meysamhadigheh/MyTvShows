@@ -22,7 +22,6 @@ import info.meysam.mytvshows.api.model.Movie
 import info.meysam.mytvshows.databinding.FragmentMoviesBinding
 import info.meysam.mytvshows.repository.impl.MovieRepository
 import info.meysam.mytvshows.ui.view.activities.MainActivityViewModel
-import kotlinx.android.synthetic.main.fragment_movies.*
 
 
 class MoviesFragment : Fragment() {
@@ -90,9 +89,9 @@ class MoviesFragment : Fragment() {
         }
         viewModel.loading.observe(viewLifecycleOwner, Observer {
             if (it) {
-                progressDialog.visibility = View.VISIBLE
+                binding.progressDialog.visibility = View.VISIBLE
             } else {
-                progressDialog.visibility = View.GONE
+                binding.progressDialog.visibility = View.GONE
             }
         })
 
@@ -114,14 +113,14 @@ class MoviesFragment : Fragment() {
             override fun itemClicked(movie: Movie) {
 
 
+                sharedViewModel.setMovieId(movie.id)
+
                 view?.let { Navigation.findNavController(it).navigate(R.id.action_moviesFragment_to_movieDetailFragment) };
 
             }
 
         })
 
-
-        //
 
 
     }
@@ -134,7 +133,7 @@ class MoviesFragment : Fragment() {
 
     private fun initSearchMoviesListener() {
 
-        searchEdt.addTextChangedListener(object : TextWatcher {
+        binding.searchEdt.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
 
             }
