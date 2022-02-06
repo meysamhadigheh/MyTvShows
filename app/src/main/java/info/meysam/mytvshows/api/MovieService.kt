@@ -1,7 +1,10 @@
 package info.meysam.mytvshows.api
 
 
+import com.haroldadmin.cnradapter.NetworkResponse
+import com.haroldadmin.cnradapter.NetworkResponseAdapterFactory
 import info.meysam.mytvshows.BuildConfig
+import info.meysam.mytvshows.api.model.ErrorResponse
 import info.meysam.mytvshows.api.model.GetMoviesResponse
 import info.meysam.mytvshows.api.model.MovieDetail
 import okhttp3.OkHttpClient
@@ -19,15 +22,15 @@ interface MovieService {
 
 
     @GET("movie/popular")
-    suspend fun getPopularMovies(@QueryMap query: Map<String, String>): Response<GetMoviesResponse>
+    suspend fun getPopularMovies(@QueryMap query: Map<String, String>): NetworkResponse<GetMoviesResponse, ErrorResponse>
 
     @GET("search/movie")
-    suspend fun searchMovies(@QueryMap query: Map<String, String>): Response<GetMoviesResponse>
+    suspend fun searchMovies(@QueryMap query: Map<String, String>): NetworkResponse<GetMoviesResponse, ErrorResponse>
 
     @GET("movie/{movie_id}")
     suspend fun getMovieDetail(
         @Path("movie_id") id: Int?,
-        @QueryMap query: Map<String, String>): Response<MovieDetail>
+        @QueryMap query: Map<String, String>): NetworkResponse<MovieDetail, ErrorResponse>
 
 
 
@@ -41,12 +44,12 @@ interface MovieService {
             .readTimeout(60, TimeUnit.SECONDS)
             .connectTimeout(60, TimeUnit.SECONDS)
             .addInterceptor(interceptor)
-        //    .addInterceptor( NetworkConnectionInterceptor(context))
             .build()
         private val retrofit by lazy {
             Retrofit.Builder()
                 .baseUrl(BuildConfig.TMDB_BASE_URL)
                 .addConverterFactory(MoshiConverterFactory.create())
+                .addCallAdapterFactory(NetworkResponseAdapterFactory())
                 .client(okHttpClient)
                 .build()
         }

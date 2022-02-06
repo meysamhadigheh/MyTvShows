@@ -2,6 +2,7 @@ package info.meysam.mytvshows.ui.view.fragments.movies
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.haroldadmin.cnradapter.NetworkResponse
 import info.meysam.mytvshows.api.model.Movie
 import info.meysam.mytvshows.repository.impl.MovieRepository
 import kotlinx.coroutines.*
@@ -28,13 +29,19 @@ class MoviesViewModel(
             val response = movieRepository.getPopularMovies(page)
             withContext(Dispatchers.Main) {
 
-                if (response.isSuccessful) {
-                    movies.postValue(response.body()?.results)
-                    loading.value = false
-                } else {
-                    onError("Error : ${response.message()} ")
-                }
+                when (response) {
+                    is NetworkResponse.Success -> {
 
+                        movies.postValue(response.body.results)
+                        loading.value = false
+                    }
+                    is NetworkResponse.Error -> {
+
+                        onError("Error : ${response.error?.message} ")
+                        loading.value = false
+                    }
+
+                }
 
             }
         }
@@ -45,11 +52,18 @@ class MoviesViewModel(
             val response = movieRepository.searchMovies(searchText =searchText)
             withContext(Dispatchers.Main) {
 
-                if (response.isSuccessful) {
-                    movies.postValue(response.body()?.results)
-                    loading.value = false
-                } else {
-                    onError("Error : ${response.message()} ")
+                when (response) {
+                    is NetworkResponse.Success -> {
+
+                        movies.postValue(response.body.results)
+                        loading.value = false
+                    }
+                    is NetworkResponse.Error -> {
+
+                        onError("Error : ${response.error?.message} ")
+                        loading.value = false
+                    }
+
                 }
 
 

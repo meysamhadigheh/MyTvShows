@@ -3,6 +3,7 @@ package info.meysam.mytvshows.ui.view.fragments.detail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.haroldadmin.cnradapter.NetworkResponse
 import info.meysam.mytvshows.api.model.MovieDetail
 import info.meysam.mytvshows.repository.impl.MovieRepository
 import kotlinx.coroutines.*
@@ -30,11 +31,18 @@ class MovieDetailViewModel(private val movieRepository: MovieRepository) : ViewM
             val response = movieRepository.getMovieDetail(id = id)
             withContext(Dispatchers.Main) {
 
-                if (response.isSuccessful) {
-                    _movie.value= response.body()
-                    loading.value = false
-                } else {
-                    onError("Error : ${response.message()} ")
+                when (response) {
+                    is NetworkResponse.Success -> {
+
+                        _movie.postValue(response.body)
+                        loading.value = false
+                    }
+                    is NetworkResponse.Error -> {
+
+                        onError("Error : ${response.error?.message} ")
+                        loading.value = false
+                    }
+
                 }
 
 
