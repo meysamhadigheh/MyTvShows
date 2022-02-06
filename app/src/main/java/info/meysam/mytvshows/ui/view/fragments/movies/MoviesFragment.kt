@@ -35,13 +35,10 @@ import info.meysam.mytvshows.utilModule.general.gone
 class MoviesFragment : Fragment() {
 
     lateinit var viewModel: MoviesViewModel
-
     private val sharedViewModel: MainActivityViewModel by activityViewModels()
 
     lateinit var moviesAdapter :MovieAdapter
     lateinit var binding: FragmentMoviesBinding
-
-
 
 
     override fun onCreateView(
@@ -92,13 +89,14 @@ class MoviesFragment : Fragment() {
             movies?.let {
                 moviesAdapter.setMovies(it)
 
+
+                /**
+                 * Displays a Empty layout when there is not match for user search
+                 *
+                 */
                 if (it.isEmpty()) binding.emptyLayout.root.visible() else binding.emptyLayout.root.gone()
 
-
-
             }
-
-
 
         })
 
@@ -203,6 +201,11 @@ class MoviesFragment : Fragment() {
 
     }
 
+
+    /**
+     * Displays a Network error alert dialog to the user
+     *
+     */
     private fun displayNetworkError() {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.oups)

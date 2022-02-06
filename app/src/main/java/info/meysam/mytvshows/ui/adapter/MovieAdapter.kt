@@ -34,6 +34,11 @@ class MovieAdapter(private val onClickListener: OnClickListener) : RecyclerView.
         holder.binding.rate.text = movie.vote_average.toString()
         Glide.with(holder.itemView.context).load(movie.getPosterUrl()).into(holder.binding.image)
 
+
+        /**
+         * change badge color based on the rating
+         *
+         */
         holder.binding.rateBg.setColorFilter(
             when (movie.vote_average?:0F) {
 
@@ -67,7 +72,7 @@ class MovieAdapter(private val onClickListener: OnClickListener) : RecyclerView.
 
             })
 
-        holder.itemView.setOnClickListener {
+        holder.binding.mainLayout.setOnClickListener {
 
             onClickListener.onClick(movie)
 

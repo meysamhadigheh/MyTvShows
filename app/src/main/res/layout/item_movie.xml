@@ -10,7 +10,10 @@
     android:layout_marginBottom="6dp"
     app:cardCornerRadius="9dp"
     app:cardPreventCornerOverlap="true"
-    android:id="@+id/main_layout">
+    android:id="@+id/main_layout"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="?attr/selectableItemBackgroundBorderless">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

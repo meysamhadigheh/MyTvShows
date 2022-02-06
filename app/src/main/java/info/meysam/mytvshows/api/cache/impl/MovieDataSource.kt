@@ -7,15 +7,18 @@ import info.meysam.mytvshows.api.model.MovieDetail
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
+
+
+/**
+ * Caching movie details for further usage that load from cache instead of network call
+ *
+ */
 class MovieDataSource(private val maxCacheSize: Int = DEFAULT_MAX_CACHE_SIZE) : IMovieDataSource {
 
     companion object {
         const val DEFAULT_MAX_CACHE_SIZE = 500
     }
 
-    //We use a Set in order to avoid duplicated elements
-    //We use a LinkedHashSet in order to keep the elements ordered following the insertion order
-    // because at some point we will remove the oldest ones.
     @VisibleForTesting
     val cache = LinkedHashSet<MovieDetail>()
 

@@ -32,6 +32,11 @@ data class MovieDetail(
 ) {
 
 
+
+    /**
+     * change budget format to more readable type that shows k for 1000, ....
+     *
+     */
     fun getBudget(): String? {
 
         budget?.let {
@@ -51,6 +56,11 @@ data class MovieDetail(
 
     }
 
+
+    /**
+     * Change date format to show in 3 char month format
+     *
+     */
 
     fun getReleaseDate():String{
         val firstDate = release_date

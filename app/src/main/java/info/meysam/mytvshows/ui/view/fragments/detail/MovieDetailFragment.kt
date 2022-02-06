@@ -109,6 +109,11 @@ class MovieDetailFragment : Fragment() {
     }
 
 
+
+    /**
+     * Displays a Network error alert dialog to the user
+     *
+     */
     private fun displayNetworkError() {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(R.string.oups)

@@ -24,8 +24,11 @@ class MoviesViewModel(
 
     var pageIndex: Int = 1
 
+    //region load more
     var loadMoreStatus = false
     var loadMoreItem: LoadMoreItem? = null
+
+    //endregion
 
 
     var job: Job? = null
@@ -53,6 +56,11 @@ class MoviesViewModel(
             }
         }
     }
+
+    /**
+     * Search for movies based on the user keyword search
+     *
+     */
     fun searchMovies(searchText: String) {
 
         job = CoroutineScope(Dispatchers.IO).launch {

@@ -1,10 +1,8 @@
-package info.meysam.mytvshows.api.model;
+package info.meysam.mytvshows.api.model
 
-public class BelongsToCollection {
-
-public Integer id;
-public String name;
-public String poster_path;
-public String backdrop_path;
-
+class BelongsToCollection {
+    var id: Int? = null
+    var name: String? = null
+    var poster_path: String? = null
+    var backdrop_path: String? = null
 }
