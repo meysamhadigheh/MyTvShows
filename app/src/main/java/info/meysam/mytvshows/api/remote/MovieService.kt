@@ -1,4 +1,4 @@
-package info.meysam.mytvshows.api
+package info.meysam.mytvshows.api.remote
 
 
 import com.haroldadmin.cnradapter.NetworkResponse
@@ -9,7 +9,6 @@ import info.meysam.mytvshows.api.model.GetMoviesResponse
 import info.meysam.mytvshows.api.model.MovieDetail
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET

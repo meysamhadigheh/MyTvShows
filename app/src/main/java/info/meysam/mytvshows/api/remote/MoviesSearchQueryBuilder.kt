@@ -1,4 +1,4 @@
-package info.meysam.mytvshows.api
+package info.meysam.mytvshows.api.remote
 
 class MoviesSearchQueryBuilder : MovieQueryBuilder() {
     private var page: String? = null
