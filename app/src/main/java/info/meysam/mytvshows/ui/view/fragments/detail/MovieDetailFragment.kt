@@ -70,7 +70,6 @@ class MovieDetailFragment : Fragment() {
         viewModel.movie.observe(viewLifecycleOwner){
 
 
-
             it.backdrop_path?.let { backdropPath ->
                 Glide.with(this)
                     .load("https://image.tmdb.org/t/p/w1280$backdropPath")
