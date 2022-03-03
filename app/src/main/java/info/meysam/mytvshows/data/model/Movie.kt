@@ -1,11 +1,4 @@
-package info.meysam.mytvshows.api.model
-
-import androidx.core.content.ContextCompat
-import com.bumptech.glide.Glide
-import info.meysam.hivaadapter.ItemBinder
-import info.meysam.hivaadapter.ItemHolder
-import info.meysam.mytvshows.R
-import kotlinx.android.synthetic.main.item_movie.view.*
+package info.meysam.mytvshows.data.model
 
 
 data class Movie(

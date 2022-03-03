@@ -1,4 +1,4 @@
-package info.meysam.mytvshows.api.model
+package info.meysam.mytvshows.data.model
 
 class ProductionCompany {
     var id: Int? = null

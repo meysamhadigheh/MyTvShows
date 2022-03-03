@@ -1,4 +1,4 @@
-package info.meysam.mytvshows.api.remote
+package info.meysam.mytvshows.data.remote
 
 class MovieDetailQueryBuilder : MovieQueryBuilder() {
 

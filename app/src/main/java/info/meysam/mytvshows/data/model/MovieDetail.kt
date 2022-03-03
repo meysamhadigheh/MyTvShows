@@ -1,8 +1,12 @@
-package info.meysam.mytvshows.api.model
+package info.meysam.mytvshows.data.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.text.SimpleDateFormat
 import java.util.*
 
+
+@Entity(tableName = "movie_detail_table")
 data class MovieDetail(
     var adult: Boolean? = null,
     var backdrop_path: String? = null,
@@ -10,6 +14,8 @@ data class MovieDetail(
     var budget: Int? = null,
     var genres: List<Genre>? = null,
     var homepage: String? = null,
+
+    @PrimaryKey
     var id: Int? = null,
     var imdb_id: String? = null,
     var original_language: String? = null,

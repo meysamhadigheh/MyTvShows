@@ -3,8 +3,8 @@ package info.meysam.mytvshows.ui.view.fragments.movies
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.haroldadmin.cnradapter.NetworkResponse
-import info.meysam.mytvshows.api.model.LoadMoreItem
-import info.meysam.mytvshows.api.model.Movie
+import info.meysam.mytvshows.data.model.LoadMoreItem
+import info.meysam.mytvshows.data.model.Movie
 import info.meysam.mytvshows.repository.impl.MovieRepository
 import kotlinx.coroutines.*
 

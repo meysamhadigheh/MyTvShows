@@ -1,12 +1,12 @@
-package info.meysam.mytvshows.api.remote
+package info.meysam.mytvshows.data.remote
 
 
 import com.haroldadmin.cnradapter.NetworkResponse
 import com.haroldadmin.cnradapter.NetworkResponseAdapterFactory
 import info.meysam.mytvshows.BuildConfig
-import info.meysam.mytvshows.api.model.ErrorResponse
-import info.meysam.mytvshows.api.model.GetMoviesResponse
-import info.meysam.mytvshows.api.model.MovieDetail
+import info.meysam.mytvshows.data.model.ErrorResponse
+import info.meysam.mytvshows.data.model.GetMoviesResponse
+import info.meysam.mytvshows.data.model.MovieDetail
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

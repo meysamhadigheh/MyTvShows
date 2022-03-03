@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import info.meysam.mytvshows.R
-import info.meysam.mytvshows.api.remote.MovieService
+import info.meysam.mytvshows.data.remote.MovieService
 import info.meysam.mytvshows.databinding.FragmentMovieDetailBinding
 import info.meysam.mytvshows.repository.impl.MovieRepository
 import info.meysam.mytvshows.ui.view.activities.MainActivityViewModel

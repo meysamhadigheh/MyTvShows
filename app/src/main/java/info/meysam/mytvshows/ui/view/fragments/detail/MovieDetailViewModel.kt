@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.haroldadmin.cnradapter.NetworkResponse
-import info.meysam.mytvshows.api.model.MovieDetail
+import info.meysam.mytvshows.data.model.MovieDetail
 import info.meysam.mytvshows.repository.impl.MovieRepository
 import kotlinx.coroutines.*
 
@@ -28,25 +28,42 @@ class MovieDetailViewModel(private val movieRepository: MovieRepository) : ViewM
     fun loadDetail(id: Int) {
 
         job = CoroutineScope(Dispatchers.IO).launch {
-            val response = movieRepository.getMovieDetail(id = id)
-            withContext(Dispatchers.Main) {
 
-                when (response) {
-                    is NetworkResponse.Success -> {
 
-                        _movie.postValue(response.body)
-                        loading.value = false
+            movieRepository.getDetail(id)?.let {
+
+                _movie.postValue(it)
+                loading.value = false
+
+
+            }?: kotlin.run {
+
+
+                val response = movieRepository.getMovieDetail(id = id)
+                withContext(Dispatchers.Main) {
+
+                    when (response) {
+                        is NetworkResponse.Success -> {
+
+
+                            movieRepository.insert(response.body)
+                            _movie.postValue(movieRepository.getDetail(id))
+
+                            loading.value = false
+                        }
+                        is NetworkResponse.Error -> {
+
+                            onError("Error : ${response.error?.message} ")
+                            loading.value = false
+                        }
+
                     }
-                    is NetworkResponse.Error -> {
 
-                        onError("Error : ${response.error?.message} ")
-                        loading.value = false
-                    }
 
                 }
 
-
             }
+
         }
     }
 

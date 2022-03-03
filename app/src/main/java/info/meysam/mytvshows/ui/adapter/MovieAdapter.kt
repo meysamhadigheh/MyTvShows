@@ -6,7 +6,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import info.meysam.mytvshows.R
-import info.meysam.mytvshows.api.model.Movie
+import info.meysam.mytvshows.data.model.Movie
 import info.meysam.mytvshows.databinding.ItemMovieBinding
 
 class MovieAdapter(private val onClickListener: OnClickListener) : RecyclerView.Adapter<MainViewHolder>() {

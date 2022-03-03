@@ -1,4 +1,4 @@
-package info.meysam.mytvshows.api.model
+package info.meysam.mytvshows.data.model
 
 class ProductionCountry {
     var iso_3166_1: String? = null

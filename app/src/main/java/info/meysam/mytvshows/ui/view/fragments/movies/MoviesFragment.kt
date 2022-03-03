@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import info.meysam.mytvshows.R
-import info.meysam.mytvshows.api.remote.MovieService
+import info.meysam.mytvshows.data.remote.MovieService
 import info.meysam.mytvshows.databinding.FragmentMoviesBinding
 import info.meysam.mytvshows.repository.impl.MovieRepository
 import info.meysam.mytvshows.ui.adapter.MovieAdapter
