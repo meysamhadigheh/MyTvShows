@@ -32,8 +32,12 @@ class MovieDetailViewModel(private val movieRepository: MovieRepository) : ViewM
 
             movieRepository.getDetail(id)?.let {
 
-                _movie.postValue(it)
-                loading.value = false
+                withContext(Dispatchers.Main) {
+
+                    _movie.postValue(it)
+                    loading.value = false
+
+                }
 
 
             }?: kotlin.run {

@@ -11,10 +11,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import info.meysam.mytvshows.MovieApplication
 import info.meysam.mytvshows.R
-import info.meysam.mytvshows.data.remote.MovieService
 import info.meysam.mytvshows.databinding.FragmentMovieDetailBinding
-import info.meysam.mytvshows.repository.impl.MovieRepository
 import info.meysam.mytvshows.ui.view.activities.MainActivityViewModel
 
 
@@ -45,14 +44,10 @@ class MovieDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        val movieService = MovieService.instance
-
-        val movieRepository = MovieRepository(movieService)
-
         viewModel =
             ViewModelProvider(
                 this,
-                MovieDetailViewModelFactory(movieRepository)
+                MovieDetailViewModelFactory((requireActivity().application as MovieApplication).repository)
             ).get(MovieDetailViewModel::class.java)
         initObserver()
 
@@ -86,7 +81,7 @@ class MovieDetailFragment : Fragment() {
             binding.movieRating.rating = (it.vote_average ?:0F )/2
             binding.movieReleaseDate.text = "Release Date : ${it.getReleaseDate()}"
             binding.movieOverview.text = it.overview
-            binding.movieBudget.text="Budget : $${it.getBudget()}"
+            binding.movieBudget.text="Budget : $${it.getBudgetFormatted()}"
 
 
         }

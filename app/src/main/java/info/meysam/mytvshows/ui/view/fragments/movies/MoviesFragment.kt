@@ -16,11 +16,13 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import info.meysam.mytvshows.MovieApplication
 import info.meysam.mytvshows.R
 import info.meysam.mytvshows.data.remote.MovieService
 import info.meysam.mytvshows.databinding.FragmentMoviesBinding
 import info.meysam.mytvshows.repository.impl.MovieRepository
 import info.meysam.mytvshows.ui.adapter.MovieAdapter
+import info.meysam.mytvshows.ui.view.activities.MainActivity
 import info.meysam.mytvshows.ui.view.activities.MainActivityViewModel
 
 import info.meysam.mytvshows.utilModule.general.visible
@@ -53,15 +55,10 @@ class MoviesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        val moviesService = MovieService.instance
-
-        val moviesRepository = MovieRepository(moviesService)
-
-
         viewModel =
             ViewModelProvider(
                 this,
-                MoviesViewModelFactory(moviesRepository)
+                MoviesViewModelFactory((requireActivity().application as MovieApplication).repository)
             ).get(MoviesViewModel::class.java)
 
 

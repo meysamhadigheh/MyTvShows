@@ -8,9 +8,11 @@ class MovieDetailViewModelFactory(private val movieRepository: MovieRepository) 
     ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MovieDetailViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
             return MovieDetailViewModel(movieRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
 }
+
 
