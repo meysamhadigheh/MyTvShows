@@ -4,10 +4,14 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import info.meysam.mytvshows.data.model.MovieDetail
+import androidx.room.TypeConverters
+import info.meysam.mytvshows.data.model.*
 
 // Annotates class to be a Room Database with a table (entity) of the Word class
-@Database(entities = arrayOf(MovieDetail::class), version = 1, exportSchema = false)
+@Database(entities = arrayOf(MovieDetail::class), version = 4, exportSchema = false)
+@TypeConverters(GenreListConverter::class, BelongsToCollectionTypeConverter::class,
+    ProductionCompanyTypeConverter::class,ProductionCountryTypeConverter::class, SpokenLanguageTypeConverter::class)
+
 public abstract class MovieDetailRoomDatabase : RoomDatabase() {
 
    abstract fun movieDetailDao(): MovieDetailDao
@@ -26,7 +30,9 @@ public abstract class MovieDetailRoomDatabase : RoomDatabase() {
                         context.applicationContext,
                         MovieDetailRoomDatabase::class.java,
                         "movie_detail_database"
-                    ).build()
+                    )
+                    .fallbackToDestructiveMigration()
+                    .build()
                 INSTANCE = instance
                 // return instance
                 instance
